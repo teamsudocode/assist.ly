@@ -44,7 +44,7 @@ class Issue(models.Model):
     source = models.IntegerField(choices=ISSUE_SOURCES)
     status = models.IntegerField(choices=ISSUE_STATUS)
     priority = models.IntegerField(default=0)
-    category = models.ForeignKey(WatsonCategory)
+    category = models.ForeignKey(WatsonCategory, null=True, blank=True)
     comment = models.ForeignKey(FB_Comment, null=True, blank=True)
     tweet = models.ForeignKey(TW_Tweet, null=True, blank=True)
 
