@@ -1,2 +1,136 @@
+@charset "UTF-8";
+/* line 1, /Users/Abhishek/Downloads/assist.ly/assistly/reset.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+/* line 22, /Users/Abhishek/Downloads/assist.ly/assistly/reset.scss */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+/* line 26, /Users/Abhishek/Downloads/assist.ly/assistly/reset.scss */
+body {
+  line-height: 1; }
+
+/* line 29, /Users/Abhishek/Downloads/assist.ly/assistly/reset.scss */
+ol, ul {
+  list-style: none; }
+
+/* line 32, /Users/Abhishek/Downloads/assist.ly/assistly/reset.scss */
+blockquote, q {
+  quotes: none; }
+
+/* line 35, /Users/Abhishek/Downloads/assist.ly/assistly/reset.scss */
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+/* line 40, /Users/Abhishek/Downloads/assist.ly/assistly/reset.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* line 44, /Users/Abhishek/Downloads/assist.ly/assistly/reset.scss */
+a {
+  text-decoration: none; }
+
+/* line 47, /Users/Abhishek/Downloads/assist.ly/assistly/reset.scss */
+button {
+  border: none;
+  outline: none; }
+
+/* line 3, /Users/Abhishek/Downloads/assist.ly/assistly/style.scss */
+.titlebar {
+  padding: 16px;
+  background: #FFFFFF;
+  border: 1px solid #EBF6FF; }
+
+@font-face {
+  font-family: 'Metropolis-Regular';
+  src: url("assets/fonts/Metropolis-Regular.woff");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Metropolis-Light';
+  src: url("assets/fonts/Metropolis-Light.woff");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Metropolis-SemiBold';
+  src: url("assets/fonts/Metropolis-SemiBold.woff");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Metropolis-Bold';
+  src: url("assets/fonts/Metropolis-Bold.woff");
+  font-weight: normal;
+  font-style: normal; }
+
+/* line 37, /Users/Abhishek/Downloads/assist.ly/assistly/style.scss */
+body {
+  background-color: #fafafa; }
+
+/* line 42, /Users/Abhishek/Downloads/assist.ly/assistly/style.scss */
+.common div, .customer div, .company div {
+  width: 300px;
+  padding: 16px;
+  background: #FFFFFF;
+  border: 1px solid rgba(197, 197, 197, 0.63);
+  box-shadow: 0 1px 0 0 rgba(227, 227, 227, 0.5);
+  border-radius: 3px; }
+  /* line 49, /Users/Abhishek/Downloads/assist.ly/assistly/style.scss */
+  .common div h4, .customer div h4, .company div h4 {
+    font-family: Metropolis-Regular;
+    font-size: 12px;
+    color: #BBBBBB;
+    letter-spacing: 0.5px; }
+  /* line 55, /Users/Abhishek/Downloads/assist.ly/assistly/style.scss */
+  .common div p, .customer div p, .company div p {
+    /* You messaged “od1105: */
+    font-family: Metropolis-Regular;
+    font-size: 12px;
+    color: #6F6F6F;
+    letter-spacing: 0.5px;
+    line-height: 20px; }
+
+/* line 66, /Users/Abhishek/Downloads/assist.ly/assistly/style.scss */
+.customer {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+  /* line 68, /Users/Abhishek/Downloads/assist.ly/assistly/style.scss */
+  .customer img {
+    margin-right: 28px; }
+
+/* line 76, /Users/Abhishek/Downloads/assist.ly/assistly/style.scss */
+.company {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center; }
+  /* line 77, /Users/Abhishek/Downloads/assist.ly/assistly/style.scss */
+  .company img {
+    margin-left: 28px; }
 
 /*# sourceMappingURL=style.css.map */
