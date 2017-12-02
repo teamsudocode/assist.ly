@@ -14,6 +14,14 @@ ISSUE_STATUS = (
 )
 
 
+class WatsonCategory(models.Model):
+    client_id = models.CharField(max_length=20)
+    category = models.CharField(max_length=50)
+
+    def __str__(self):
+        return '{} | {}'.format(self.category, self.client_id)
+
+
 class FB_Comment(models.Model):
     comment_id = models.CharField(max_length=20, primary_key=True)
     post_id = models.CharField(max_length=20)
@@ -27,13 +35,16 @@ class FB_Comment(models.Model):
     def __str__(self):
         return '{} | {}'.format(self.sender_name, self.comment_id)
 
+
 class TW_Tweet(models.Model):
     pass
+
 
 class Issue(models.Model):
     source = models.IntegerField(choices=ISSUE_SOURCES)
     status = models.IntegerField(choices=ISSUE_STATUS)
     priority = models.IntegerField(default=0)
+    category = models.ForeignKey(WatsonCategory)
     comment = models.ForeignKey(FB_Comment, null=True, blank=True)
     tweet = models.ForeignKey(TW_Tweet, null=True, blank=True)
 

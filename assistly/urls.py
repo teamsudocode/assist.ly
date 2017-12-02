@@ -16,6 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from app.views import *
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^api/issues', get_issues_with_status),
+    url(r'^api/conversation', get_conversation_of_issue),
+    url(r'^api/issue/(?P<issue_id>\w+)/respond', respond_to_issue)
 ]
