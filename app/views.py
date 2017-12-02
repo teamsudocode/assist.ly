@@ -21,15 +21,39 @@ def fb_comment_to_json(each):
         'created_at': each.comment.created_at.strftime('%d %b, %I:%M %p')
     }
 
-def get_issues_with_status(request):
+
+
+def get_all_categories(request):
     try:
-        status = request.GET['status']
+        client_id = request.GET['client_id']
+        response = [
+            {'pk': each.pk,
+             'category': each.category,
+             'open': each.issue_set.count()
+            }
+            for each in WatsonCategory.objects.filter(client_id=client_id)
+        ]
+        return JsonResponse(response, safe=False, status=200)
     except KeyError:
         return JsonResponse(
-            {'status': 400, 'message': 'Missing status code'},
+            {'status': 400, 'message': 'Missing parameters'},
             status=400
         )
-    issues = Issue.objects.filter(status=status)
+
+
+def filter_issues(request):
+    issues = None
+    try:
+        if 'status' in request.GET:
+            issues = Issue.objects.filter(status=request.GET['status'])
+        elif 'category' in request.GET:
+            issues = Issue.objects.filter(category__pk=request.GET['category'])
+    except KeyError:
+        return JsonResponse(
+            {'status': 400, 'message': 'Invalid query parameters'},
+            status=400
+        )
+    # issues = Issue.objects.filter(status=status)
     response = [
         {'id': each.pk,
          'source': each.source,
@@ -37,6 +61,7 @@ def get_issues_with_status(request):
          'priority': each.priority,
          'message': each.comment.message,
          'sender': each.comment.sender_name,
+         'category': each.category.category,
          'page_id': each.comment.page_id,
          'post_id': each.comment.post_id,
          'created_at': each.comment.created_at.strftime('%d %b, %I:%M %p'),
@@ -59,6 +84,7 @@ def get_conversation_of_issue(request):
             'post_id': issue.comment.post_id,
             'created_at': issue.comment.created_at,
             'updated_at': issue.comment.updated_at,
+            'category': issue.category.category,
             'url': fb_get_comment_url(issue.comment.page_id,
                                       issue.comment.post_id,
                                       issue.comment.comment_id)

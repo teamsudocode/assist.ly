@@ -20,7 +20,8 @@ from app.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/issues', get_issues_with_status),
+    url(r'^api/categories', get_all_categories),
+    url(r'^api/issues', filter_issues),
     url(r'^api/conversation', get_conversation_of_issue),
     url(r'^api/issue/(?P<issue_id>\w+)/respond', respond_to_issue)
 ]
