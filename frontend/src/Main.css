@@ -1,0 +1,255 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+a {
+  text-decoration: none; }
+
+button {
+  border: none;
+  outline: none; }
+
+@font-face {
+  font-family: 'Metropolis-Regular';
+  src: url("assets/fonts/Metropolis-Regular.woff");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Metropolis-Light';
+  src: url("assets/fonts/Metropolis-Light.woff");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Metropolis-SemiBold';
+  src: url("assets/fonts/Metropolis-SemiBold.woff");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Metropolis-Bold';
+  src: url("assets/fonts/Metropolis-Bold.woff");
+  font-weight: normal;
+  font-style: normal; }
+body {
+  background-color: #fafafa; }
+
+.titlebar {
+  padding: 16px;
+  background: #FFFFFF;
+  border: 1px solid #EBF6FF; }
+
+.view {
+  display: flex;
+  flex-direction: row; }
+  .view .col0 {
+    height: 100vh;
+    width: 25%;
+    padding: 32px 16px;
+    background: #FFFFFF;
+    border: 1px solid #EBF6FF; }
+    .view .col0 h1 {
+      text-transform: uppercase;
+      font-family: Metropolis-Medium;
+      font-size: 14px;
+      color: #404040;
+      letter-spacing: 2.33px; }
+    .view .col0 .divider {
+      width: 25%;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #E4E4E4; }
+    .view .col0 ul li div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 24px 0px; }
+      .view .col0 ul li div p {
+        font-family: Metropolis-Regular;
+        font-size: 16px;
+        color: #8F8F8F;
+        letter-spacing: 0; }
+      .view .col0 ul li div label {
+        font-family: Metropolis-Regular;
+        font-size: 16px;
+        color: #8F8F8F;
+        letter-spacing: 0; }
+    .view .col0 ul li .active p {
+      font-family: Metropolis-Medium;
+      color: #3B9FF7; }
+    .view .col0 ul li .active label {
+      font-family: Metropolis-Medium;
+      color: #3B9FF7; }
+  .view .col1 {
+    margin-right: 0px !important; }
+    .view .col1 .tickets {
+      margin-right: 0px !important;
+      width: 50%;
+      display: flex;
+      flex-direction: column; }
+      .view .col1 .tickets .ticket {
+        margin: 12px 0px 12px 40px;
+        padding: 16px 24px;
+        background: #FFFFFF;
+        border: 1px solid #EBF6FF; }
+        .view .col1 .tickets .ticket .header {
+          display: flex;
+          margin-bottom: 12px;
+          flex-direction: row;
+          justify-content: space-between; }
+          .view .col1 .tickets .ticket .header div h1 {
+            font-family: Metropolis-Medium;
+            font-size: 16px;
+            color: #404040;
+            letter-spacing: 0; }
+          .view .col1 .tickets .ticket .header .bro {
+            display: flex;
+            flex-direction: row; }
+            .view .col1 .tickets .ticket .header .bro .status {
+              vertical-align: middle;
+              text-transform: uppercase;
+              font-family: Metropolis-SemiBold;
+              font-size: 8px;
+              color: #359BF5;
+              letter-spacing: 0.3px; }
+              .view .col1 .tickets .ticket .header .bro .status div {
+                border-radius: 50%;
+                color: #359BF5;
+                height: 6px;
+                width: 6px; }
+            .view .col1 .tickets .ticket .header .bro .media {
+              margin-left: 16px;
+              vertical-align: middle;
+              padding: 4px;
+              text-transform: uppercase;
+              font-family: Metropolis-SemiBold;
+              font-size: 8px;
+              background: #FAFAFA;
+              color: #3B5998;
+              letter-spacing: 0.3px; }
+        .view .col1 .tickets .ticket p {
+          font-family: Metropolis-Light;
+          font-size: 14px;
+          color: #404040;
+          letter-spacing: 0.5px;
+          line-height: 21px; }
+      .view .col1 .tickets .high {
+        border-left: 4px solid #FF4A4A; }
+      .view .col1 .tickets .medium {
+        border-left: 4px solid #FFC53A; }
+      .view .col1 .tickets .low {
+        border-left: 4px solid #E3E3E3; }
+  .view .col2 {
+    background: #FFFFFF;
+    border: 1px solid #EBF6FF;
+    width: 35%; }
+    .view .col2 .chat {
+      padding: 24px; }
+      .view .col2 .chat .header {
+        display: flex;
+        margin-bottom: 8px;
+        flex-direction: row;
+        justify-content: space-around; }
+        .view .col2 .chat .header div {
+          display: flex;
+          flex-direction: row; }
+          .view .col2 .chat .header div h1 {
+            font-family: Metropolis-Medium;
+            font-size: 16px;
+            color: #404040;
+            letter-spacing: 0; }
+          .view .col2 .chat .header div h2 {
+            /* 8:8: */
+            font-family: Metropolis-Bold;
+            font-size: 7.51px;
+            color: #FF4A4A;
+            letter-spacing: 0.63px;
+            line-height: 7.51px;
+            padding: 8px;
+            background: rgba(255, 74, 74, 0.05);
+            border-radius: 1.25px; }
+        .view .col2 .chat .header button {
+          /* BG: */
+          background: #FFFFFF;
+          border: 1px solid #16BA00;
+          border-radius: 1.11px; }
+          .view .col2 .chat .header button a {
+            text-transform: uppercase;
+            font-family: Metropolis-Medium;
+            font-size: 6.67px;
+            color: #16BA00;
+            letter-spacing: 0.56px;
+            line-height: 6.67px; }
+      .view .col2 .chat .customer {
+        margin-bottom: 24px;
+        padding: 20px;
+        background: #F8F8F8;
+        border-radius: 3px;
+        font-family: Metropolis-Regular;
+        font-size: 12px;
+        color: #6F6F6F;
+        letter-spacing: 0.5px;
+        line-height: 18px; }
+      .view .col2 .chat .company {
+        margin-bottom: 24px;
+        padding: 20px;
+        background: rgba(53, 155, 245, 0.05);
+        border-radius: 3px;
+        font-family: Metropolis-Medium;
+        font-size: 12px;
+        color: #359BF5;
+        letter-spacing: 0.5px;
+        line-height: 18px; }
+      .view .col2 .chat .send input[type="text"] {
+        height: 24x;
+        padding: 8px;
+        font-family: 'Metropolis-Medium';
+        font-size: 13px;
+        color: #717171;
+        background: #FFFFFF;
+        width: 65%;
+        border: 1px solid #EEEEEE;
+        box-shadow: 2px 2px 4px 0 rgba(238, 238, 238, 0.5); }
+        .view .col2 .chat .send input[type="text"]:focus {
+          outline: none; }
+      .view .col2 .chat .send img {
+        vertical-align: middle; }
+
+/*# sourceMappingURL=stylemain.css.map */
