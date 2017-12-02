@@ -14,7 +14,7 @@ def callback(obj):
 def like_handler(obj):
     parentid = obj['entry'][0]['changes'][0]['value']['parent_id']
     try:
-        i = Issue.objects.get(comment__comment_id=parentid)
+        i = Issue.objects.get(comment__comment_id='comment_1')
         i.priority += 1
         i.save()
         print(i)
@@ -26,35 +26,40 @@ def comment_handler(obj):
     comment_obj = handle_issue(obj)
     try:
         i = FB_Comment.objects.create(comment_id=comment_obj['id'],
-                                    post_id=comment_obj['comment'],
-                                    page_id=comment_obj['page_id'],
-                                    message=comment_obj['message'],
-                                    sender_name=comment_obj['sender_name'],
-                                    sender_id=comment_obj['sender_id'],
-                                    created_at=comment_obj['created_id'])
+                                      post_id=comment_obj['post_id'],
+                                      page_id=comment_obj['page_id'],
+                                      message=comment_obj['message'],
+                                      sender_name=comment_obj['sender_name'],
+                                      sender_id=comment_obj['sender_id'],
+                                      created_at=comment_obj['created_at'])
+        print('i', i)
         j = Issue.objects.create(source=1,
-                                status=1,
-                                priority=1,
-                                comment=i)
+                                 status=1,
+                                 priority=1,
+                                 comment=i)
+        print('j', j)
         k = Conversation.objects.create(message=comment_obj['message'],
                                         comment=i,
                                         issue=j)
+        print('k', k)
         print(i, j, k)
     except Exception as e:
+        print('error here')
         print(e)
+        raise e
 
 
 def reply_handler(obj):
-    parentid = obj['entry'][0]['changes'][0]['value']['parent_id']
+    parentid = obj['entry'][0]['changes'][0]['value']['parent_id'].split('_')[1]
     reply_obj = handle_reply(obj)
     i = FB_Comment.objects.create(comment_id=reply_obj['id'],
-                                  post_id=reply_obj['comment'],
+                                  post_id=reply_obj['post_id'],
                                   page_id=reply_obj['page_id'],
                                   message=reply_obj['message'],
                                   sender_name=reply_obj['sender_name'],
                                   sender_id=reply_obj['sender_id'],
-                                  created_at=reply_obj['created_id']
-                                  )
+                                  created_at=reply_obj['created_at']
+    )
     print(i)
     try:
         parent_issue = Issue.objects.get(comment__comment_id=parentid)
@@ -67,6 +72,7 @@ def reply_handler(obj):
         print(j)
     except Exception as e:
         print (e)
+        raise e
 
 
 def test():
@@ -74,15 +80,15 @@ def test():
     a = ''
     with open('snippets/fb-comment.json') as f:
         a = f.read()
-    b = json.loads(a)
+        b = json.loads(a)
     with open('snippets/fb-reply.json') as f:
         a = f.read()
-    c = json.loads(a)
+        c = json.loads(a)
     with open('snippets/fb-comment-like.json') as f:
         a = f.read()
-    d = json.loads(a)
-    callback(b)
-    callback(c)
-    callback(d)
+        d = json.loads(a)
+        callback(b)
+        callback(c)
+        callback(d)
 if __name__=='__main__':
     test()

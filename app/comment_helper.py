@@ -1,3 +1,5 @@
+from datetime import datetime
+
 PAGE_URL = None
 PAGE_ID = None
 
@@ -9,7 +11,9 @@ def sanitize(req_obj):
 
 def common_part_construct(obj):
     data = obj['entry'][0]['changes'][0]['value']
-    result = {  'id': data['comment_id'],
+    result = {  'id': data['comment_id'].split('_')[1],
+                'post_id': data['comment_id'].split('_')[0],
+                'page_id': data['post_id'].split('_')[0],
                 'name': data['sender_name'],
                 'message': data['message'],
                 'issue': None,
@@ -19,13 +23,15 @@ def common_part_construct(obj):
                 'comment': None,
                 'sender_name': data['sender_name'],
                 'sender_id': data['sender_id'],
-                'created_at': data['created_time'],
-                'date': obj['entry'][0]['time']
+                'created_at': datetime.fromtimestamp(data['created_time']),
             }
     return result
 
 def is_issue(obj):
-    return obj['entry'][0]['changes'][0]['value']['parent_id'].startswith(PAGE_ID)
+    post_id = obj['entry'][0]['changes'][0]['value']['post_id']
+    parent_id = obj['entry'][0]['changes'][0]['value']['parent_id']
+    return post_id == parent_id
+    # return obj['entry'][0]['changes'][0]['value']['parent_id'].startswith(PAGE_ID)
 
 def handle_issue(obj):
     data = obj['entry'][0]['changes'][0]['value']

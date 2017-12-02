@@ -54,9 +54,9 @@ class Issue(models.Model):
 
 class Conversation(models.Model):
     message = models.CharField(max_length=200)
-    comment = models.ForeignKey(FB_Comment)
+    comment = models.ForeignKey(FB_Comment, null=True, blank=True)
     retweet = models.ForeignKey(TW_Tweet, null=True, blank=True)
-    issue = models.ForeignKey(Issue, null=True, blank=True)
+    issue = models.ForeignKey(Issue)
 
     def __str__(self):
         return '{} | {} | {}'.format(self.issue.status, self.issue.priority, self.message)

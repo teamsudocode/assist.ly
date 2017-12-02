@@ -48,12 +48,15 @@ def filter_issues(request):
             issues = Issue.objects.filter(status=request.GET['status'])
         elif 'category' in request.GET:
             issues = Issue.objects.filter(category__pk=request.GET['category'])
+        else:
+            raise KeyError
     except KeyError:
         return JsonResponse(
             {'status': 400, 'message': 'Invalid query parameters'},
             status=400
         )
     # issues = Issue.objects.filter(status=status)
+    print(issues)
     response = [
         {'id': each.pk,
          'source': each.source,
@@ -61,7 +64,7 @@ def filter_issues(request):
          'priority': each.priority,
          'message': each.comment.message,
          'sender': each.comment.sender_name,
-         'category': each.category.category,
+         'category': each.category.category if each.category else None,
          'page_id': each.comment.page_id,
          'post_id': each.comment.post_id,
          'created_at': each.comment.created_at.strftime('%d %b, %I:%M %p'),
@@ -84,7 +87,7 @@ def get_conversation_of_issue(request):
             'post_id': issue.comment.post_id,
             'created_at': issue.comment.created_at,
             'updated_at': issue.comment.updated_at,
-            'category': issue.category.category,
+            'category': issue.category.category if issue.category else None,
             'url': fb_get_comment_url(issue.comment.page_id,
                                       issue.comment.post_id,
                                       issue.comment.comment_id)
@@ -116,11 +119,18 @@ def get_conversation_of_issue(request):
 def respond_to_issue(request, issue_id):
     try:
         message = request.POST['message']
+        notify = request.POST['notify'] if 'notify' in request.POST else None
         issue = Issue.objects.get(pk=issue_id)
         comment_id = issue.comment.comment_id
-        # api call to facebook for a comment/response
-        # don't add to database
-        # fb response will make the entry
+
+        if notify:
+            # api call to facebook for a comment/response
+            # don't add to database
+            # fb response will make the entry
+            pass
+        else:
+            # make the entry to conversation
+            Conversation.objects.create(message=message, issue=issue)
         return JsonResponse({'message': 'ok'}, status=200)
     except KeyError:
         return JsonResponse({'message': 'Invalid parameters', 'status': 400}, status=400)
