@@ -46,3 +46,6 @@ class Conversation(models.Model):
     comment = models.ForeignKey(FB_Comment)
     retweet = models.ForeignKey(TW_Tweet, null=True, blank=True)
     issue = models.ForeignKey(Issue, null=True, blank=True)
+
+    def __str__(self):
+        return '{} | {} | {}'.format(self.issue.status, self.issue.priority, self.message)
