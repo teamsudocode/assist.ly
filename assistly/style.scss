@@ -1,10 +1,5 @@
 @import "reset";
 $brand: '#3B9FF7';
-.titlebar {
-    padding: 16px;
-    background: #FFFFFF;
-    border: 1px solid #EBF6FF;
-}
 
 @font-face {
     font-family: 'Metropolis-Regular';
@@ -36,49 +31,4 @@ $brand: '#3B9FF7';
 
 body {
     background-color: #fafafa;
-}
-
-.common {
-    div {
-        width: 300px;
-        padding: 16px;
-        background: #FFFFFF;
-        border: 1px solid rgba(197, 197, 197, 0.63);
-        box-shadow: 0 1px 0 0 rgba(227, 227, 227, 0.50);
-        border-radius: 3px;
-        h4 {
-            font-family: Metropolis-Regular;
-            font-size: 12px;
-            color: #BBBBBB;
-            letter-spacing: 0.5px;
-        }
-        p {
-            /* You messaged “od1105: */
-            font-family: Metropolis-Regular;
-            font-size: 12px;
-            color: #6F6F6F;
-            letter-spacing: 0.5px;
-            line-height: 20px;
-        }
-    }
-}
-
-.customer {
-    @extend .common;
-    img {
-        margin-right: 28px;
-    }
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.company {
-    img {
-        margin-left: 28px;
-    }
-    @extend .common;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
 }
