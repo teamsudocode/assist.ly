@@ -49,7 +49,7 @@ class Issue(models.Model):
     tweet = models.ForeignKey(TW_Tweet, null=True, blank=True)
 
     def __str__(self):
-        return '{} | {} | {}'.format(self.source, self.comment, self.tweet)
+        return '{} | {} | {} | {}'.format(self.source, self.comment, self.tweet, self.priority)
 
 
 class Conversation(models.Model):
