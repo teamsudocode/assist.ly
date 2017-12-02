@@ -29,6 +29,7 @@ class Issue(models.Model):
 
 
 class Conversation(models.Model):
-    # comment = models.ForeignKey(FB_Comment)
+    message = models.CharField(max_length=200)
+    comment = models.ForeignKey(FB_Comment)
     retweet = models.ForeignKey(TW_Tweet, null=True, blank=True)
     issue = models.ForeignKey(Issue, null=True, blank=True)
