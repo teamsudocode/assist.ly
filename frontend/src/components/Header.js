@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../style.css';
 
-class App extends Component {
+class Header extends Component {
   render() {
     return (
-      <div className="App">
-        Hello
-      </div>
+        <div className="titlebar"><img src={require("../assets/logo.svg")} alt= "Logo"/></div>
     );
   }
 }
 
-export default App;
+export default Header;
