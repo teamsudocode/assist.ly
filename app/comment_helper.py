@@ -14,15 +14,14 @@ def common_part_construct(obj):
     result = {  'id': data['comment_id'].split('_')[1],
                 'post_id': data['comment_id'].split('_')[0],
                 'page_id': data['post_id'].split('_')[0],
-                'name': data['sender_name'],
                 'message': data['message'],
                 'issue': None,
                 'priority': None,
                 'type': 1,
                 'categories': None,
                 'comment': None,
-                'sender_name': data['sender_name'],
-                'sender_id': data['sender_id'],
+                'sender_name': data['from']['name'],
+                'sender_id': data['from']['id'],
                 'created_at': datetime.fromtimestamp(data['created_time']),
             }
     return result
@@ -30,6 +29,7 @@ def common_part_construct(obj):
 def is_issue(obj):
     post_id = obj['entry'][0]['changes'][0]['value']['post_id']
     parent_id = obj['entry'][0]['changes'][0]['value']['parent_id']
+    print(parent_id, post_id, parent_id == post_id)
     return post_id == parent_id
     # return obj['entry'][0]['changes'][0]['value']['parent_id'].startswith(PAGE_ID)
 
@@ -39,6 +39,7 @@ def handle_issue(obj):
     comment_obj['issue'] = True
     comment_obj['comment'] = data['comment_id']
     # comment_obj['categories'] = classify(data['message'])
+    print(comment_obj['sender_name'], 'is sender name')
     return comment_obj
 
 def handle_reply(obj):

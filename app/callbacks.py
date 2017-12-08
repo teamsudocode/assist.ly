@@ -4,10 +4,15 @@ from .models import FB_Comment, Issue, Conversation
 
 def callback(obj):
     if request_type(obj) == 'comment':
+        print("Check1")
+        print(is_issue(obj), 'issue status')
         if is_issue(obj):
+            print('handling comment')
             comment_handler(obj)
+            print("Check2")
         else:
             reply_handler(obj)
+            print("Check3")
     elif request_type(obj) == 'like':
         like_handler(obj)
 
@@ -24,6 +29,7 @@ def like_handler(obj):
 
 def comment_handler(obj):
     comment_obj = handle_issue(obj)
+    print('handled comment to ',comment_obj)
     try:
         i = FB_Comment.objects.create(comment_id=comment_obj['id'],
                                       post_id=comment_obj['post_id'],
@@ -56,8 +62,8 @@ def reply_handler(obj):
                                   post_id=reply_obj['post_id'],
                                   page_id=reply_obj['page_id'],
                                   message=reply_obj['message'],
-                                  sender_name=reply_obj['sender_name'],
-                                  sender_id=reply_obj['sender_id'],
+                                  # sender_name=reply_obj['sender_name'],
+                                  # sender_id=reply_obj['sender_id'],
                                   created_at=reply_obj['created_at']
     )
     print(i)
