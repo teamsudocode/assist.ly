@@ -12,5 +12,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-loader": "^7.1.2",
+    "webpack": "^3.10.0",
+    "webpack-bundle-tracker": "^0.2.0"
   }
 }
