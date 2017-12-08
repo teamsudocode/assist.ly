@@ -14,6 +14,10 @@ ISSUE_STATUS = (
 )
 
 
+ISSUE_SOURCES_DICT = {key: value for key, value in ISSUE_SOURCES}
+ISSUE_STATUS_DICT = {key: value for key, value in ISSUE_STATUS}
+
+
 class WatsonCategory(models.Model):
     client_id = models.CharField(max_length=20)
     category = models.CharField(max_length=50)
