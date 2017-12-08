@@ -17,3 +17,16 @@ def get_sentiment(text):
     print(r.json())
 
 
+
+def classifier(text):
+    words = text.lower().strip().split()
+    issue_keywords = ['issue', 'problem', 'dissatisfied', 'disappointed',
+                'sad', 'angry', 'unhappy', 'bad', 'rude','sucks']
+    issue_bool =(keyword in words for keyword in issue_keywords)
+    if any(issue_bool):
+        return 'Issue'
+    appreciation_keywords = ['thank', 'help', 'best', 'good','amazing',                              'recommend','nice', 'grateful']
+    appreciation_bool = (keyword in words for keyword in appreciation_keywords)
+    if any(appreciation_bool):
+        return 'Appreciation'
+    return 'Neutral'
