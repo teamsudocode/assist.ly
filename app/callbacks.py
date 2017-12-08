@@ -35,8 +35,8 @@ def comment_handler(obj):
                                       post_id=comment_obj['post_id'],
                                       page_id=comment_obj['page_id'],
                                       message=comment_obj['message'],
-                                      sender_name=comment_obj['sender_name'],
-                                      sender_id=comment_obj['sender_id'],
+                                      sender_name=comment_obj['from']['name'],
+                                      sender_id=comment_obj['from']['id'],
                                       created_at=comment_obj['created_at'])
         print('i', i)
         j = Issue.objects.create(source=1,
@@ -62,8 +62,8 @@ def reply_handler(obj):
                                   post_id=reply_obj['post_id'],
                                   page_id=reply_obj['page_id'],
                                   message=reply_obj['message'],
-                                  # sender_name=reply_obj['sender_name'],
-                                  # sender_id=reply_obj['sender_id'],
+                                  sender_name=reply_obj['from']['name'],
+                                  sender_id=reply_obj['from']['id'],
                                   created_at=reply_obj['created_at']
     )
     print(i)
