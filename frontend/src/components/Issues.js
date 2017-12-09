@@ -3,20 +3,21 @@ import '../Main.css';
 
 export default class Issues extends Component {
   render() {
+    let className = "ticket " + this.props.priority
     return (
-        <div className={this.props.status}>
+        <div className={className} onClick={this.props.clickHandler}>
             <div className="header">
                 <div>
-                    <h1>{this.props.author}</h1>
+                    <h1>{this.props.sender_name}</h1>
                 </div>
                 <div className="bro">
                     <div className="status">
-                        <div>{this.props.type}</div>
+                        <div>{this.props.status}</div>
                      </div>   
-                    <div className="media">{this.props.media}</div>
+                    <div className="media">{this.props.source}</div>
                 </div>
             </div>
-            <p>{this.props.payload}</p>
+            <p>{this.props.message}</p>
         </div>
     );
   }

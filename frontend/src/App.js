@@ -16,7 +16,7 @@ class App extends Component {
   render() {
     return (
     <Provider store={store}>
-       <Main />
+       <Main clientName={window.location.pathname.split('/', 2)[1].split('?', 1)[0]} />
     </Provider>
     );
   }
