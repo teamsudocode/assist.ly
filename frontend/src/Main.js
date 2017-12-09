@@ -10,7 +10,8 @@ export default class Main extends Component {
     super(props)
     this.state = {
       category: null,
-      activeIssue: null
+      activeIssue: {sender_name: "souvik sen", priority: "high", status: "Open", source: "Facebook", message: "od110510389196784000 the ordered product didn't deliver to me and the delivery boy didn't approach me at all but the order status is showing that customer has rejected the order not once but thrice…", issue_id: 2 }
+      
     }
   }
 
@@ -36,11 +37,10 @@ export default class Main extends Component {
           />
           <ContentMid clientName={this.props.clientName}
                       category = {this.state.category}
-                      activeIssue={this.state.issue} 
                       updateActiveIssue = {(newIssue) => this.updateActiveIssue(newIssue)}
           />
           <ContentRight clientName={this.props.clientName} 
-                        issue={this.state.issue}
+                        issue={this.state.activeIssue.id}
           />
         </div>
         

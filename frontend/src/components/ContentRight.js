@@ -39,11 +39,14 @@ class ContentRight extends Component {
     }
   }
 
-  componentDidMount() {
-    fetch(server+'/api/issues?status=1')
+  componentWillReceiveProps(newProps) {
+    console.log('rebuilding content right for', newProps.issue)
+    fetch(server+'/api/conversations?issue_id=' + newProps.issue)
       .then(res => res.json())
       .then((res) => {
         console.log(res)
+        console.log(res.conversations)
+        this.setState({res})
       });
   }
 
@@ -55,8 +58,8 @@ class ContentRight extends Component {
         { this.props.issue }
           <div className="header">
               <div>
-                  <h1>{this.props.user}</h1>
-                  <h2>{this.props.priority}</h2>
+                  {/* <h1>{this.props.user}</h1> */}
+                  {/* <h2>{this.props.priority}</h2> */}
               </div>
               <button><a href="">Mark as resolved</a></button>
           </div>

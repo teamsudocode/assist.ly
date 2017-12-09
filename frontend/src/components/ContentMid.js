@@ -8,7 +8,7 @@ export default class ContentMid extends Component {
   constructor(props){
     super(props)
     // this.state = {
-    //   data: [{sender_name: "souvik sen", priority: "high", status: "Open", source: "Facebook", message: "od110510389196784000 the ordered product didn't deliver to me and the delivery boy didn't approach me at all but the order status is showing that customer has rejected the order not once but thrice…", issue_id: 2, },
+    //   data: [{sender_name: "souvik sen", priority: "high", status: "Open", source: "Facebook", message: "od110510389196784000 the ordered product didn't deliver to me and the delivery boy didn't approach me at all but the order status is showing that customer has rejected the order not once but thrice…", issue_id: 2 },
     //          {sender_name: "souvik sen", priority: "medium", status: "Open", source: "Facebook", message: "od110510389196784000 the ordered product didn't deliver to me and the delivery boy didn't approach me at all but the order status is showing that customer has rejected the order not once but thrice…", issue_id: 10  },
     //          {sender_name: "souvik sen", priority: "low", status: "Open", source: "Facebook", message: "od110510389196784000 the ordered product didn't deliver to me and the delivery boy didn't approach me at all but the order status is showing that customer has rejected the order not once but thrice…", issue_id: 9 },
     //          {sender_name: "souvik sen", priority: "low", status: "Open", source: "Facebook", message: "od110510389196784000 the ordered product didn't deliver to me and the delivery boy didn't approach me at all but the order status is showing that customer has rejected the order not once but thrice…", issue_id: 7 },
