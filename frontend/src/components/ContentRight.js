@@ -44,14 +44,16 @@ class ContentRight extends Component {
     fetch(server+'/api/conversations?issue_id=' + newProps.issue)
       .then(res => res.json())
       .then((res) => {
-        console.log(res)
+        console.log(res.issue_info)
         console.log(res.conversations)
-        this.setState({res})
+        this.setState({issue_info: res.issue_info, conversations: res.conversations})
       });
   }
 
 
   render() {
+    console.log('rendering main with category', this.state)
+    
     return (
       <div className="col2">
         <div className="chat">
