@@ -22,6 +22,21 @@ def allow_cors(route):
     return wrapper
 
 
+def normalize_priority(result):
+    max_score = max(result, key=lambda x: x['priority'])['priority']
+
+    def set_priority_str(each):
+        if each['priority'] > 2/3 * max_score:
+            each['priority'] = 'high'
+        elif each['priority'] > 1/3 * max_score:
+            each['priority'] = 'medium'
+        else:
+            each['priority'] = 'low'
+        return each
+
+    return list(map(set_priority_str, result))
+
+
 def fb_get_comment_url(page_id, post_id, comment_id):
     return 'https://www.facebook.com/{}/posts/{}?comment_id={}'.format(page_id, post_id, comment_id)
 
@@ -56,13 +71,13 @@ def fb_callback(request):
 @allow_cors
 def get_all_categories(request):
     try:
-        client_id = request.GET['client_id']
+        client_name = request.GET['client_name']
         response = [
             {'pk': each.pk,
-             'category': each.category,
+             'category': each.category.capitalize(),
              'open': each.issue_set.count()
             }
-            for each in WatsonCategory.objects.filter(client_id=client_id)
+            for each in WatsonCategory.objects.filter(client_name=client_name)
         ]
         return JsonResponse(response, safe=False, status=200)
     except KeyError:
@@ -76,19 +91,21 @@ def get_all_categories(request):
 def filter_issues(request):
     issues = None
     try:
-        if 'status' in request.GET:
-            issues = Issue.objects.filter(status=request.GET['status'])
-        elif 'category' in request.GET:
-            issues = Issue.objects.filter(category__pk=request.GET['category'])
+        issues = Issue.objects.filter(status=int(request.GET['status']))
+        if request.GET['category'] == 'null':
+            return JsonResponse([], safe=False, status=200)
         else:
-            raise KeyError
-    except KeyError:
+            issues = issues.filter(category__pk=int(request.GET['category']))
+    except (KeyError, ValueError):
+        if 'category' not in request.GET:
+            message = 'Missing issue category'
+        else:
+            message = 'Invalid query parameters'
         return JsonResponse(
-            {'status': 400, 'message': 'Invalid query parameters'},
-            status=400
+            {'status': 400, 'message': message}, status=400
         )
     # issues = Issue.objects.filter(status=status)
-    response = [
+    result = [
         {'id': each.pk,
          'source': each.source,
          'status': each.status,
@@ -104,7 +121,9 @@ def filter_issues(request):
                                    each.comment.comment_id)
         }
         for each in issues]
-    response = [fb_comment_to_json(each) for each in issues]
+
+    response = normalize_priority(result) if result else result
+    # response = [fb_comment_to_json(each) for each in issues]
     return JsonResponse(response, safe=False, status=200)
     # return render(request, 'issues.html', context={'issues': response})
 
@@ -116,10 +135,10 @@ def get_conversation_of_issue(request):
         interactions = issue.conversation_set.all().order_by('comment__created_at')
 
         issue_info = {
-            'issue_id': issue.pk,
+            'id': issue.pk,
             'page_id': issue.comment.page_id,
             'post_id': issue.comment.post_id,
-            'created_at': issue.commentcreated_at,
+            'created_at': issue.comment.created_at,
             'updated_at': issue.comment.updated_at,
             'category': issue.category.category if issue.category else None,
             'url': fb_get_comment_url(issue.comment.page_id,
@@ -129,13 +148,15 @@ def get_conversation_of_issue(request):
         conversations = [
             {'id': each.pk,
              'message': each.message,
+             'who_sent_it': 'company' if each.comment.sender_name == issue.comment.sender_name else 'customer',
              'created_at': each.comment.created_at.strftime('%d %b, %I:%M %p'),
              'sender': each.comment.sender_name,
              'comment_id': each.comment.comment_id,
              'page_id': each.comment.page_id,
              'post_id': each.comment.post_id
             }
-            for each in interactions]
+            for each in interactions
+        ]
         return JsonResponse(
             {'issue_info': issue_info,
              'conversations': conversations
