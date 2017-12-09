@@ -19,11 +19,11 @@ ISSUE_STATUS_DICT = {key: value for key, value in ISSUE_STATUS}
 
 
 class WatsonCategory(models.Model):
-    client_id = models.CharField(max_length=20)
+    client_name = models.CharField(max_length=20)
     category = models.CharField(max_length=50)
 
     def __str__(self):
-        return '{} | {}'.format(self.category, self.client_id)
+        return '{} | {}'.format(self.category, self.client_name)
 
 
 class FB_Comment(models.Model):
