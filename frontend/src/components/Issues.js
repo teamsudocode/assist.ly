@@ -4,8 +4,9 @@ import '../Main.css';
 export default class Issues extends Component {
   render() {
     let className = "ticket " + this.props.priority
+    let div_id = "mid-issue-" + this.props.id
     return (
-        <div className={className} onClick={this.props.clickHandler}>
+        <div id={div_id} className={className} onClick={this.props.clickHandler}>
             <div className="header">
                 <div>
                     <h1>{this.props.sender_name}</h1>

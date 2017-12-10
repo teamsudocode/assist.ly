@@ -138,6 +138,9 @@ def get_conversation_of_issue(request):
             'id': issue.pk,
             'page_id': issue.comment.page_id,
             'post_id': issue.comment.post_id,
+            'sender_name': issue.comment.sender_name,
+            'sender_url': 'https://facebook.com/{}'.format(issue.comment.sender_id),
+            'priority': issue.priority,
             'created_at': issue.comment.created_at,
             'updated_at': issue.comment.updated_at,
             'category': issue.category.category if issue.category else None,
@@ -175,8 +178,9 @@ def get_conversation_of_issue(request):
 @allow_cors
 def respond_to_issue(request, issue_id):
     try:
-        message = request.POST['message']
-        notify = request.POST['notify'] if 'notify' in request.POST else None
+        print(request.GET)
+        message = request.GET['message']
+        notify = request.GET['notify'] if 'notify' in request.GET else None
         issue = Issue.objects.get(pk=issue_id)
         comment_id = issue.comment.comment_id
 
@@ -184,8 +188,9 @@ def respond_to_issue(request, issue_id):
             # api call to facebook for a comment/response
             # don't add to database
             # fb response will make the entry
-            with open(os.path.join(__file__, '../.env.json')) as f:
+            with open(os.path.join(os.path.dirname(__file__), '../.env.json')) as f:
                 fb_token = json.loads(f.read())
+            
             headers = {
                 'Authorization': 'Bearer {}'.format(fb_token)
             }
@@ -207,8 +212,9 @@ def respond_to_issue(request, issue_id):
 @allow_cors
 def change_status(request):
     try:
-        issue = Issue.objects.get(pk=request.POST['issue_id'])
-        issue.status = request.POST['status']
+        issue = Issue.objects.get(pk=request.GET['issue_id'])
+        issue.status = request.GET['status']
+        print('changing state of', issue.id, 'to', issue.status)
         issue.save()
         return JsonResponse({'message': 'ok'}, status=200)
     except KeyError:

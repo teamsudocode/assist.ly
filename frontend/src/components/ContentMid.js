@@ -18,7 +18,7 @@ export default class ContentMid extends Component {
     this.state = {data: null}
   }
   
-  componentWillReceiveProps(newProps) {
+    componentWillReceiveProps(newProps) {
     console.log('content mid component changed props')
     let url = server + '/api/issues?status=1&category=' + ((newProps.category !== null) ? newProps.category : 'null')
     console.log(url)
